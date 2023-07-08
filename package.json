@@ -1,0 +1,14 @@
+{
+  "name": "electron-svelte",
+  "version": "0.0.1",
+  "description": "FE: Svelte + TS + Vite. BE: Electron + TS",
+  "scripts": {
+    "start": "concurrently \"cd backend && npm run start:dev\" \"cd frontend && npm run dev\""
+  },
+  "keywords": [],
+  "author": "planetsLightningArrester",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
