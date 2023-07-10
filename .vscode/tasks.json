@@ -2,20 +2,24 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"dependsOn": "npm: copy-client",
-			"type": "typescript",
-			"tsconfig": "tsconfig.json",
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"label": "tsc: build - tsconfig.json",
+			"label": "start-frontend-server",
+			"detail": "Start the frontend server by npm run dev",
+			"type": "npm",
+			"script": "dev",
+			"path": "frontend",
+			"isBackground": true,
+			"problemMatcher": {
+				"background": {
+					"beginsPattern": "^[ \\t]*> vite",
+					"endsPattern": "^[ \\t]*VITE[ \\t]+[v\\d.]+[ \\t]+ready in"
+				},
+        "pattern": {
+          "regexp": "^[:\\d]+[ \\t]*[vite-plugin-svelte] $",
+        }
+      },
 			"presentation": {
 				"echo": true,
-				"reveal": "never",
+				"reveal": "silent",
 				"focus": false,
 				"panel": "shared",
 				"showReuseMessage": true,
@@ -23,14 +27,42 @@
 			}
 		},
 		{
+			"label": "compile-backend-and-start-frontend",
+			"detail": "Compile backend and start the frontend server",
+			"dependsOrder": "parallel",
+			"dependsOn": [
+				"compile-backend",
+				"start-frontend-server"
+			]
+		},
+		{
+			"label": "compile-backend",
+			"detail": "Clean and compile backend",
+			"dependsOn": [
+				"clean-backend",
+				"copy-backend-src-client-to-dist"
+			],
+			"path": "backend",
+			"type": "npm",
+			"script": "compile",
+			"presentation": {
+				"echo": true,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"label": "clean-backend",
+			"detail": "Remove backend/dist",
+			"path": "backend",
 			"type": "npm",
 			"script": "clean",
-			"problemMatcher": [],
-			"label": "npm: clean",
-			"detail": "rimraf dist",
 			"presentation": {
 				"echo": true,
-				"reveal": "never",
+				"reveal": "silent",
 				"focus": false,
 				"panel": "shared",
 				"showReuseMessage": true,
@@ -38,20 +70,19 @@
 			}
 		},
 		{
-			"dependsOn": "npm: clean",
+			"label": "copy-backend-src-client-to-dist",
+			"detail": "Copy backend/src/client to backend/dist/client",
+			"path": "backend",
 			"type": "npm",
 			"script": "copy-client",
-			"problemMatcher": [],
-			"label": "npm: copy-client",
-			"detail": "run-script-os",
 			"presentation": {
 				"echo": true,
-				"reveal": "never",
+				"reveal": "silent",
 				"focus": false,
 				"panel": "shared",
 				"showReuseMessage": true,
 				"clear": false
-			}
+			},
 		}
 	]
 }

@@ -4,8 +4,8 @@
   "description": "FE: Svelte + TS + Vite. BE: Electron + TS",
   "scripts": {
     "start": "concurrently \"cd backend && npm run start:dev\" \"cd frontend && npm run dev\"",
-    "build:f": "cd frontend && npm run build",
-    "build:b": "cd backend && npm run make"
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run make"
   },
   "keywords": [],
   "author": "planetsLightningArrester",
