@@ -1,8 +1,10 @@
 out
 dist
 node_modules
-/test-results/
-/playwright-report/
-/playwright/.cache/
 *.png
 !**/src/**/*.png
+backend/src/client
+# Playwright
+**/test-results/**
+**/playwright-report/**
+/playwright/.cache/
