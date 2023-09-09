@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "ms-playwright.playwright",
-    "svelte.svelte-vscode"
+    "svelte.svelte-vscode",
+    "dbaeumer.vscode-eslint"
   ]
 }
