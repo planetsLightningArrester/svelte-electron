@@ -13,10 +13,10 @@
 					"beginsPattern": "^[ \\t]*> vite",
 					"endsPattern": "^[ \\t]*VITE[ \\t]+[v\\d.]+[ \\t]+ready in"
 				},
-        "pattern": {
-          "regexp": "^[:\\d]+[ \\t]*[vite-plugin-svelte] $",
-        }
-      },
+				"pattern": {
+					"regexp": "^[:\\d]+[ \\t]*[vite-plugin-svelte] $",
+				}
+			},
 			"presentation": {
 				"echo": true,
 				"reveal": "silent",
@@ -37,14 +37,10 @@
 		},
 		{
 			"label": "compile-backend",
-			"detail": "Clean and compile backend",
-			"dependsOn": [
-				"clean-backend",
-				"copy-backend-src-client-to-dist"
-			],
+			"detail": "Compile backend",
 			"path": "backend",
 			"type": "npm",
-			"script": "compile",
+			"script": "compile:dev",
 			"presentation": {
 				"echo": true,
 				"reveal": "silent",
@@ -53,36 +49,6 @@
 				"showReuseMessage": true,
 				"clear": false
 			}
-		},
-		{
-			"label": "clean-backend",
-			"detail": "Remove backend/dist",
-			"path": "backend",
-			"type": "npm",
-			"script": "clean",
-			"presentation": {
-				"echo": true,
-				"reveal": "silent",
-				"focus": false,
-				"panel": "shared",
-				"showReuseMessage": true,
-				"clear": false
-			}
-		},
-		{
-			"label": "copy-backend-src-client-to-dist",
-			"detail": "Copy backend/src/client to backend/dist/client",
-			"path": "backend",
-			"type": "npm",
-			"script": "copy-client",
-			"presentation": {
-				"echo": true,
-				"reveal": "silent",
-				"focus": false,
-				"panel": "shared",
-				"showReuseMessage": true,
-				"clear": false
-			},
 		}
 	]
 }

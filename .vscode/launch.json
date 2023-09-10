@@ -34,67 +34,35 @@
         "runtimeExecutable": "${workspaceFolder}/backend/node_modules/.bin/electron.cmd"
       },
       "runtimeArgs": [
-        "--remote-debugging-port=9223"  // open debugging port for renderer process
+        "--remote-debugging-port=9223" // open debugging port for renderer process
       ],
       "env": {
         "NODE_ENV": "development"
       },
-      "args": ["."],
+      "args": [
+        "."
+      ],
       "outputCapture": "std",
       "sourceMaps": true,
       "resolveSourceMapLocations": [
-        "${workspaceFolder}/backend/dist/**",    // use source maps for files in workspace folder
-        "!**/node_modules/**"           // but ignore everything in the node_modules folder
+        "${workspaceFolder}/backend/dist/**", // use source maps for files in workspace folder
+        "!**/node_modules/**" // but ignore everything in the node_modules folder
       ],
       "preLaunchTask": "compile-backend-and-start-frontend",
-    },
-    {
-      // Launches the backend in standalone mode, consuming the client from backend/src/client
-      "name": "Electron rendering backend/src/client",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/backend",
-      "runtimeExecutable": "${workspaceFolder}/backend/node_modules/.bin/electron",
-      "windows": {
-        "runtimeExecutable": "${workspaceFolder}/backend/node_modules/.bin/electron.cmd"
-      },
-      "runtimeArgs": [
-        "--remote-debugging-port=9223"  // open debugging port for renderer process
-      ],
-      "args": ["."],
-      "outputCapture": "std",
-      "sourceMaps": true,
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/backend/dist/**",    // use source maps for files in workspace folder
-        "!**/node_modules/**"           // but ignore everything in the node_modules folder
-      ],
-      "preLaunchTask": "compile-backend",
-    },
-    {
-      // Attach the debugger to Electron when debugging files inside backend/src/client
-      // ? This is only used if debugging vanilla HTML/CSS/JS being developed under backend/src/client
-      "name": "Electron renderer attach",
-      "type": "chrome",                 // use the Chrome debugger that comes with VS Code
-      "request": "attach",
-      "port": 9223,                     // use debug port opened in Electron: Main configuration
-      "webRoot": "${workspaceFolder}/backend",
-      "timeout": 30000
     }
   ],
-  "compounds": [                        // launch multiple configurations concurrently
+  "compounds": [ // launch multiple configurations concurrently
     {
-      "name": "Vanilla Electron",
-      "configurations": [
-        "Electron rendering backend/src/client",
-        "Electron renderer attach"
-      ]
-    },
-    {
-      "name": "Electron & Svelte",
+      "name": "Electron & Svelte debug",
       "configurations": [
         "Electron rendering frontend",
         "Svelte-attach",
-      ]
+      ],
+      "presentation": {
+        "hidden": false,
+        "group": "",
+        "order": 1
+      }
     }
   ]
 }

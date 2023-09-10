@@ -3,7 +3,7 @@ dist
 node_modules
 *.png
 !**/src/**/*.png
-backend/src/client
+backend/src/client/**
 # Playwright
 **/test-results/**
 **/playwright-report/**

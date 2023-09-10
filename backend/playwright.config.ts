@@ -1,3 +1,4 @@
+import process from 'process';
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -5,6 +6,18 @@ import { defineConfig, devices } from '@playwright/test';
  * https://github.com/motdotla/dotenv
  */
 // require('dotenv').config();
+
+// Set mode to development, so we can run electron tests with the Playwright extension
+const webSever =
+  process.env['NODE_ENV'] === 'development' ?
+    undefined :
+    {
+      command: 'cd ../frontend && npm run dev',
+      url: 'http://localhost:5173/',
+      reuseExistingServer: !process.env.CI,
+    };
+
+process.env['NODE_ENV'] = 'development';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -69,9 +82,5 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: webSever,
 });
