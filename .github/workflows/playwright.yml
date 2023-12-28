@@ -18,9 +18,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
-      run: cd backend && xvfb-run -s "-screen 0, 1280x720x24" npx playwright install --with-deps
+      run: cd backend && npx playwright install --with-deps
     - name: Run Playwright tests
-      run: cd backend && xvfb-run -s "-screen 0, 1280x720x24" npx playwright test
+      run: xvfb-run -s "-screen 0, 1280x720x24" npm run test
     - uses: actions/upload-artifact@v3
       if: always()
       with:
